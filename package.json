@@ -13,15 +13,17 @@
     "@formkit/auto-animate": "^0.8.2",
     "@iconify/react": "^5.0.1",
     "axios": "^1.7.2",
+    "classnames": "^2.5.1",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "daisyui": "^4.12.2",
+    "daisyui": "^4.12.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",

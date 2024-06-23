@@ -2,25 +2,44 @@ import React from 'react';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 
-const CButton = ({ textValue, to, icon }: { textValue: string, to?: string, icon?: string }) => {
+type CButtonProps = {
+  textValue: string;
+  to?: string;
+  icon?: string;
+  handleClick?: () => void;
+  className?: string;
+  outline?: boolean; // New prop for outline style
+};
+
+const CButton = ({ textValue, to, icon, handleClick, className, outline }: CButtonProps) => {
+  const buttonClasses = `text-white btn hover:brightness-125 flex items-center ${className}`;
+
   const ButtonContent = (
     <>
       {textValue}
-      {icon && <Icon icon={icon} color="white" />}
+      {icon && <Icon icon={icon} color="white" className="ml-2" />}
     </>
   );
 
-  return to ? (
-    <Link href={to} passHref>
-      <div className="border-0 text-white btn bg-success hover:bg-success hover:brightness-125 flex items-center">
-        {ButtonContent}
-      </div>
-    </Link>
-  ) : (
-    <button className="border-0 text-white btn bg-success hover:bg-success hover:brightness-125 flex items-center">
-      {ButtonContent}
-    </button>
-  );
+  const renderButton = () => {
+    if (to) {
+      return (
+        <Link href={to} passHref>
+          <div className={`${buttonClasses} ${outline ? 'btn-outline border-2 border-success text-success' : 'border-0 bg-success hover:bg-success'}`} onClick={handleClick}>
+            {ButtonContent}
+          </div>
+        </Link>
+      );
+    } else {
+      return (
+        <button className={`${buttonClasses} ${outline ? 'btn-outline border-2 border-success text-success' : 'border-0 bg-success hover:bg-success'}`} onClick={handleClick}>
+          {ButtonContent}
+        </button>
+      );
+    }
+  };
+
+  return renderButton();
 };
 
 export default CButton;

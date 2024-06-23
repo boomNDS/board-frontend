@@ -6,6 +6,8 @@ import CButton from "./components/CButton";
 import { Icon } from '@iconify/react';
 import BlogCard from "./components/blogs/BlogCard";
 import autoAnimate from "@formkit/auto-animate";
+import CModal from "./components/CModal";
+import CCategoryDropdown from "./components/CCategoryDropdown";
 
 const blogs = [
   {
@@ -40,11 +42,13 @@ const handleSearch = (search: string, postCategory: string) => {
 
 export default function Home() {
   const [isOpenSearch, setIsOpenSearch] = useState(false);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
   const [postCategory, setPostCategory] = useState('History');
+  const [createPostCategory, setCreatePostCategory] = useState('History');
   const [search, setSearch] = useState('');
   const blogsParent = useRef(null)
 
-
+  const handleToggle = () => setOpenCreateModal((prev) => !prev);
   const toggleSearch = () => {
     setIsOpenSearch(!isOpenSearch);
   };
@@ -67,7 +71,6 @@ export default function Home() {
                 <Icon icon="mdi:magnify" width={28} height={28} className="flex md:hidden ml-2 cursor-pointer" color="black" onClick={() => {
                   toggleSearch()
                 }} />
-                {/* set this input  to toggleSearch */}
                 <input
                   className={isOpenSearch ? "flex md:hidden input bg-transparent focus:outline-0 border-0 input-bordered w-full placeholder:text-base pl-2" : 'hidden'}
                   value={search}
@@ -92,7 +95,9 @@ export default function Home() {
               </div>
               <div className={isOpenSearch ? 'hidden md:flex' : 'flex'}>
                 <CategoryDropdown postCategory={postCategory} setPostCategory={setPostCategory} />
-                <CButton textValue="Create" icon="mdi:plus" />
+                <CButton textValue="Create" icon="mdi:plus"
+                  handleClick={handleToggle}
+                />
               </div>
             </div>
             {isOpenSearch ? <p className="flex md:hidden text-[14px] text-gray-500 ml-1">enter to completed search ...</p> : ''}
@@ -108,6 +113,27 @@ export default function Home() {
                 />
               ))}
             </div>
+            <CModal open={openCreateModal} onClose={() => setOpenCreateModal(false)}>
+              <h3 className="font-bold text-lg">
+                Create Post
+              </h3>
+              <div className="flex flex-col py-4 space-y-4">
+                <CCategoryDropdown postCategory={createPostCategory} setPostCategory={setCreatePostCategory} />
+                <input type="text" placeholder="Type here" className="input input-bordered w-full bg-transparent" />
+                <textarea className="textarea textarea-bordered w-full bg-transparent mt-3" placeholder="Bio"></textarea>
+              </div>
+              <div className="modal-action">
+                {/* closes the modal */}
+                <CButton textValue="Close"
+                  handleClick={() => setOpenCreateModal(false)}
+                  className="w-[100px]"
+                  outline
+                />
+                <CButton textValue="Post"
+                  className="w-[100px]"
+                />
+              </div>
+            </CModal>
           </div>
         </div>
       </section>
