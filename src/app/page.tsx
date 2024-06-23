@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CNavbar from "./components/CNavbar";
 import CategoryDropdown from "./components/CategoryDropdown";
 import CButton from "./components/CButton";
 import { Icon } from '@iconify/react';
 import BlogCard from "./components/blogs/BlogCard";
+import autoAnimate from "@formkit/auto-animate";
 
 const blogs = [
   {
@@ -41,10 +42,18 @@ export default function Home() {
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [postCategory, setPostCategory] = useState('History');
   const [search, setSearch] = useState('');
+  const blogsParent = useRef(null)
+
 
   const toggleSearch = () => {
     setIsOpenSearch(!isOpenSearch);
   };
+
+
+  useEffect(() => {
+    blogsParent.current && autoAnimate(blogsParent.current)
+  }, [blogsParent]
+  )
 
 
   return (
@@ -53,7 +62,7 @@ export default function Home() {
       <section className="w-full mt-[5rem]">
         <div className="container mx-auto px-4">
           <div>
-            <div className="flex space-x-4 justify-between md:justify-center  items-center">
+            <div className="flex space-x-4 justify-between md:justify-center  items-center" >
               <div className={isOpenSearch ? `flex md:hidden items-center border-2 focus-within:border-green-100 border-green-100 w-full bg-transparent rounded` : ``}>
                 <Icon icon="mdi:magnify" width={28} height={28} className="flex md:hidden ml-2 cursor-pointer" color="black" onClick={() => {
                   toggleSearch()
@@ -87,7 +96,7 @@ export default function Home() {
               </div>
             </div>
             {isOpenSearch ? <p className="flex md:hidden text-[14px] text-gray-500 ml-1">enter to completed search ...</p> : ''}
-            <div className="flex flex-col items-center py-10 space-y-1">
+            <div className="flex flex-col items-center py-10 space-y-1" ref={blogsParent}>
               {handleSearch(search, postCategory).map((blog, index) => (
                 <BlogCard
                   key={index}
