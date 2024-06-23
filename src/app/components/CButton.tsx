@@ -8,11 +8,11 @@ type CButtonProps = {
   icon?: string;
   handleClick?: () => void;
   className?: string;
-  outline?: boolean; // New prop for outline style
-};
+  outline?: boolean;
+}
 
 const CButton = ({ textValue, to, icon, handleClick, className, outline }: CButtonProps) => {
-  const buttonClasses = `text-white btn hover:brightness-125 flex items-center ${className}`;
+  const buttonClasses = ` btn hover:brightness-125 flex items-center ${className}`;
 
   const ButtonContent = (
     <>
@@ -25,14 +25,14 @@ const CButton = ({ textValue, to, icon, handleClick, className, outline }: CButt
     if (to) {
       return (
         <Link href={to} passHref>
-          <div className={`${buttonClasses} ${outline ? 'btn-outline border-2 border-success text-success' : 'border-0 bg-success hover:bg-success'}`} onClick={handleClick}>
+          <div className={`${buttonClasses} ${outline ? 'btn-outline border-2 border-success text-success' : 'border-0 bg-success hover:bg-success text-white'}`} onClick={handleClick}>
             {ButtonContent}
           </div>
         </Link>
       );
     } else {
       return (
-        <button className={`${buttonClasses} ${outline ? 'btn-outline border-2 border-success text-success' : 'border-0 bg-success hover:bg-success'}`} onClick={handleClick}>
+        <button className={`${buttonClasses} ${outline ? 'btn-outline border-2 border-success text-success' : 'border-0 bg-success hover:bg-success text-white'}`} onClick={handleClick}>
           {ButtonContent}
         </button>
       );

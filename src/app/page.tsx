@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import CNavbar from "./components/CNavbar";
 import CategoryDropdown from "./components/CategoryDropdown";
 import CButton from "./components/CButton";
 import { Icon } from '@iconify/react';
@@ -8,6 +7,7 @@ import BlogCard from "./components/blogs/BlogCard";
 import autoAnimate from "@formkit/auto-animate";
 import CModal from "./components/CModal";
 import CCategoryDropdown from "./components/CCategoryDropdown";
+import DefaultLayout from "./layout/DefaultLayout";
 
 const blogs = [
   {
@@ -61,8 +61,7 @@ export default function Home() {
 
 
   return (
-    <main className="min-h-screen bg-grey-100">
-      <CNavbar />
+    <DefaultLayout>
       <section className="w-full mt-[5rem]">
         <div className="container mx-auto px-4">
           <div>
@@ -105,6 +104,7 @@ export default function Home() {
               {handleSearch(search, postCategory).map((blog, index) => (
                 <BlogCard
                   key={index}
+                  id={blog.id}
                   authorName={blog.authorName}
                   title={blog.title}
                   category={blog.category}
@@ -123,7 +123,6 @@ export default function Home() {
                 <textarea className="textarea textarea-bordered w-full bg-transparent mt-3" placeholder="Bio"></textarea>
               </div>
               <div className="modal-action">
-                {/* closes the modal */}
                 <CButton textValue="Close"
                   handleClick={() => setOpenCreateModal(false)}
                   className="w-[100px]"
@@ -137,6 +136,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </DefaultLayout>
+
   );
 }
