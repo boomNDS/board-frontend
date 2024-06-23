@@ -15,8 +15,8 @@ export default function CategoryDropdown({ postCategory, setPostCategory }: Cate
   };
 
   return (
-    <div className="dropdown dropdown-end min-w-[128px]">
-      <div tabIndex={0} role="button" className="btn btn-ghost min-w-[128px]" onClick={toggleDropdown}>
+    <div className="dropdown dropdown-end">
+      <div tabIndex={0} role="button" className="flex btn btn-ghost" onClick={toggleDropdown}>
         {postCategory} <Icon icon={`mdi:${isOpen ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}`} width={20} height={20} />
       </div>
       {isOpen && (
