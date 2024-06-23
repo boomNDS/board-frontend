@@ -1,13 +1,8 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
+import { CategoryDropdownProps } from '../interfaces/common.interface';
+import { categories } from '../constants/common.constant';
 
-const categories = ['Community', 'History', 'Food', 'Pets', 'Health', 'Fashion', 'Exercise'];
-
-type CCategoryDropdownProps = {
-  postCategory: string;
-  setPostCategory: Function;
-};
-
-const CCategoryDropdown = ({ postCategory, setPostCategory }: CCategoryDropdownProps) => {
+const CCategoryDropdown = ({ postCategory, setPostCategory }: CategoryDropdownProps) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {

@@ -1,15 +1,12 @@
 import autoAnimate from '@formkit/auto-animate';
 import { Icon } from '@iconify/react';
 import { useEffect, useRef, useState } from 'react';
+import { CategoryDropdownProps } from '../interfaces/common.interface';
+import { categories } from '../constants/common.constant';
 
-type CategoryDropdownProps = {
-  postCategory: string;
-  setPostCategory: Function;
-};
 
 export default function CategoryDropdown({ postCategory, setPostCategory }: CategoryDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const categories = ['Community', 'History', 'Food', 'Pets', 'Health', 'Fashion', 'Exercise'];
   const parent = useRef(null)
 
   const toggleDropdown = () => {
